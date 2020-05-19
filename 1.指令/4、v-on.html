@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 事件中直接写 js 片段 -->
+        <button @click="num ++">点赞</button>
+        <!-- 事件指定一个回调函数，必须是 Vue 实例中定义的函数 -->
+        <button @click="cancel">取消</button>
+        <h1>有{{num}}个赞</h1>
+
+        <!-- 事件修饰符 -->
+        <div style="border: 1px solid  red;padding: 20px;" v-on:click.once="hello"> 
+            大 
+            <div style="border: 1px solid blue;padding: 20px;" @click.stop="hello"> 
+                小div <br />
+                <a href="http://www.baidu.com" @click.prevent>百度</a>
+            </div>
+        </div>
+
+        <!-- 按键修饰符 -->
+        <input type="text" v-on:keyup.up="num+=2" @keyup.down="num-=2" v-bind:value="num"> 
+    </div>
+    
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                num: 1,
+            },
+            methods: {
+                cancel() {
+                    this.num --;
+                },
+                hello() {
+                    alert("我被点击了");
+                }
+            },
+        })
+    </script>
+</body>
+</html>
